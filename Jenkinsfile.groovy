@@ -6,10 +6,10 @@ pipeline {
         script {
             def repoUrl = 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git'
             def branch = 'ayhem'
-            withCredentials([string(credentialsId: 'github-token', variable: '8f9b2f59-5031-4710-ba76-f57fadc1a5de')]) {
+            withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                 checkout([$class: 'GitSCM',
                     branches: [[name: "*/${branch}"]],
-                    userRemoteConfigs: [[url: "${repoUrl}", credentialsId: 'github-token']]
+                    userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']]
                 ])
             }
         }
