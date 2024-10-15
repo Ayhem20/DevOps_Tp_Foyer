@@ -1,20 +1,21 @@
 pipeline {
     agent any
 
-    stage('Checkout Code') {
-    steps {
-        script {
-            def repoUrl = 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git'
-            def branch = 'ayhem'
-            withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
-                checkout([$class: 'GitSCM',
-                    branches: [[name: "*/${branch}"]],
-                    userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']]
-                ])
+        stage('Checkout Code') {
+            steps {
+                script {
+                    def repoUrl = 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git'
+                    def branch = 'ayhem'
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: "*/${branch}"]],
+                        userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']]
+                        ])
+                    }
+                }
             }
         }
-    }
-}
+
         stage('Maven Clean and Compile') {
             steps {
                 script {
@@ -41,5 +42,4 @@ pipeline {
         }
 
         // Ajoutez d'autres stages ici si nécessaire
-    }
 }
