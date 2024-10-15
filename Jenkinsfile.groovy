@@ -7,7 +7,7 @@ pipeline {
                 script {
                     def repoUrl = 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git'
                     def branch = 'ayhem'
-                    withCredentials([string(credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de', variable: 'GITHUB_TOKEN')]) {
+                    withCredentials([usernamePassword(credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
                         checkout([$class: 'GitSCM',
                             branches: [[name: "*/${branch}"]],
                             userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']]
