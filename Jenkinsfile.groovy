@@ -28,17 +28,15 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // SonarQube credentials
-                    def sonarUser = 'admin'
-                    def sonarPassword = 'Magrouch123!'
-                    
-                    sh '''
-                    mvn sonar:sonar \
-                      -Dsonar.projectKey=DevOps_Tp_Foyer \
-                      -Dsonar.host.url=http://192.168.33.10:9000 \
-                      -Dsonar.login=${sonarUser} \
-                      -Dsonar.password=${sonarPassword}
-                    '''
+                    withCredentials([usernamePassword(credentialsId: '71c996e3-a2eb-47ae-b081-f6d349669f6d', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASSWORD')]) {
+                        sh '''
+                        mvn sonar:sonar \
+                          -Dsonar.projectKey=DevOps_Tp_Foyer \
+                          -Dsonar.host.url=http://192.168.33.10:9000 \
+                          -Dsonar.login=$SONAR_USER \
+                          -Dsonar.password=$SONAR_PASSWORD
+                        '''
+                    }
                 }
             }
         }
