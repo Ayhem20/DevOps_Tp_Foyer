@@ -40,5 +40,12 @@ pipeline {
                 }
             }
         }
+        stage('Maven Deploy') {
+            steps {
+                script {
+                    sh 'mvn clean deploy -DskipTests'
+                }
+            }
+        }
     }
 }
