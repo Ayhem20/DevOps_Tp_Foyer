@@ -57,13 +57,6 @@
             <url>http://192.168.33.111:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-<servers>
-    <server>
-        <id>nexus-snapshots</id>
-        <username>admin</username>
-        <password>nexus</password>
-    </server>
-</servers>
     <build>
         <plugins>
             <plugin>
