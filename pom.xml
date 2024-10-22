@@ -49,6 +49,20 @@
 
     </dependencies>
 
+         <!-- nexus configuration -->
+<repositories> 
+         repository>
+            <id>nexus-repo</id>
+            <url>http://192.168.33.111:8081/repository/maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+               </repositories>
+  
     <build>
         <plugins>
                  <plugin>
