@@ -28,5 +28,12 @@ pipeline {
                 // Add test commands here
             }
         }
+        {
+            steps {
+                script {
+                    sh 'mvn clean deploy -DskipTests'
+                }
+            }
+
     }
 }
