@@ -28,12 +28,14 @@ pipeline {
                 // Add test commands here
             }
         }
-        {
+         stage('Maven Deploy') {
             steps {
                 script {
                     sh 'mvn clean deploy -DskipTests'
                 }
             }
-
+        }
     }
 }
+
+
