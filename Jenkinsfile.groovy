@@ -16,6 +16,14 @@ pipeline {
                 }
             }
         }
-      
+      stage('Maven Clean and Compile') {
+            steps {
+                script {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+ 
+
     }
 }
