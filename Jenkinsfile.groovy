@@ -16,5 +16,18 @@ pipeline {
                 }
             }
         }
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                // Add build commands here, e.g., `sh 'mvn clean install'` for a Maven project
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // Add test commands here
+            }
+        }
     }
 }
+
