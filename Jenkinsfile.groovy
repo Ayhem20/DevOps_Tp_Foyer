@@ -47,30 +47,29 @@ pipeline {
                 }
             }
         }
-stage('Deploy to Nexus') {
-    steps {
-        script {
-            withCredentials([usernamePassword(credentialsId: '774b0f42-75e2-4ee5-8c86-e421249c4010', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
-                sh '''
-                mvn deploy:deploy-file \
-                  -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
-                  -DrepositoryId=deploymentRepo \
-                  -Dfile=target/tp-foyer-5.0.0.jar \
-                  -DgroupId=tn.esprit \
-                  -DartifactId=tp-foyer \
-                  -Dversion=5.0.0 \
-                  -Dpackaging=jar \
-                  -DgeneratePom=true \
-                  -Drepository.username=$NEXUS_USER \
-                  -Drepository.password=$NEXUS_PASSWORD \
-                  -Dmaven.test.skip=true
-                '''
+
+        stage('Deploy to Nexus') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: '774b0f42-75e2-4ee5-8c86-e421249c4010', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh '''
+                        mvn deploy:deploy-file \
+                          -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
+                          -DrepositoryId=deploymentRepo \
+                          -Dfile=target/tp-foyer-5.0.0.jar \
+                          -DgroupId=tn.esprit \
+                          -DartifactId=tp-foyer \
+                          -Dversion=5.0.0 \
+                          -Dpackaging=jar \
+                          -DgeneratePom=true \
+                          -Drepository.username=$NEXUS_USER \
+                          -Drepository.password=$NEXUS_PASSWORD \
+                          -Dmaven.test.skip=true
+                        '''
+                    }
+                }
             }
         }
-    }
-}
-
-}
     }
 
     post {
