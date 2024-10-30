@@ -48,14 +48,22 @@ pipeline {
             }
         }
 
-         stage("Nexus"){
-           steps{
-        sh "mvn deploy -Durl=https://192.168.56.4/repository/maven-releases/ -Drepository.username=admin -Drepository.password=Sassii260994 -Dmaven.test.skip"
-             }
-    
+        stage("Nexus") {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials-id', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh '''
+                        mvn deploy -Durl=https://192.168.56.4/repository/maven-releases/ \
+                          -Drepository.username=$NEXUS_USERNAME \
+                          -Drepository.password=$NEXUS_PASSWORD \
+                          -Dmaven.test.skip
+                        '''
+                    }
+                }
+            }
+        }
     }
-    }
-}
+
     post {
         always {
             echo 'Pipeline completed.'
