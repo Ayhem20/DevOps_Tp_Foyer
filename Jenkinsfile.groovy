@@ -55,7 +55,7 @@ pipeline {
                         sh '''
                         mvn deploy:deploy-file \
                           -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
-                          -DrepositoryId=nexus-repo \
+                          -DrepositoryId=deploymentRepo \
                           -Dfile=target/tp-foyer-5.0.0.jar \
                           -DgroupId=tn.esprit \
                           -DartifactId=tp-foyer \
