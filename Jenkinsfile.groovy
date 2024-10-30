@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Maven Clean and Compile') {
             steps {
                 script {
@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Deploy to Nexus') {
             steps {
                 script {
@@ -48,10 +48,10 @@ pipeline {
                         mvn deploy:deploy-file \
                           -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
                           -DrepositoryId=nexus-repo \
-                          -Dfile=target/your-artifact.jar \
-                          -DgroupId=your.group.id \
-                          -DartifactId=your-artifact \
-                          -Dversion=1.0.0 \
+                          -Dfile=target/tp-foyer-5.0.0.jar \
+                          -DgroupId=tn.esprit \
+                          -DartifactId=tp-foyer \
+                          -Dversion=5.0.0 \
                           -Dpackaging=jar \
                           -DgeneratePom=true \
                           -Dusername=$NEXUS_USER \
