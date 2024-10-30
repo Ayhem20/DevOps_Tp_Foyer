@@ -1,6 +1,5 @@
 pipeline {
     environment { 
-        dockerImageBackend = '' 
         MAVEN_OPTS = '-Xms256m -Xmx512m'
     }
 
@@ -52,12 +51,20 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
+                stage('Build Docker Image') {
             steps {
                 script {
-                        dockerImageBackend = docker.build("${registry}:backend-latest")
-                
+                    // Construire l'image Docker en utilisant le Dockerfile
+                    def image = docker.build("tpfoyer-app:latest")
                 }
+            }
+        }
+
+        stage('Run Docker Compose') {
+            steps {
+                echo "Starting the application and MySQL with Docker Compose"
+                sh 'docker-compose down'  // Arrêter les conteneurs précédents si nécessaires
+                sh 'docker-compose up -d --build'  // Construire et démarrer les conteneurs
             }
         }
     }
