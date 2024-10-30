@@ -51,12 +51,10 @@ pipeline {
             }
         }
 
-                stage('Build Docker Image') {
+      stage('Build Docker Image') {
             steps {
-                script {
-                    // Construire l'image Docker en utilisant le Dockerfile
-                    def image = docker.build("tpfoyer-app:latest")
-                }
+                echo "Building Docker Image"
+                sh 'docker build -t tpfoyer-app:latest .'
             }
         }
 
