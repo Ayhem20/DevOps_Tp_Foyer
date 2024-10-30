@@ -25,6 +25,14 @@ pipeline {
             }
         }
 
+        stage('Maven Package') {
+            steps {
+                script {
+                    sh 'mvn package'
+                }
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 script {
