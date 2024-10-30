@@ -48,20 +48,18 @@ pipeline {
             }
         }
 
-        stage("Nexus") {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials-id', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                        sh '''
-                        mvn deploy -Durl=https://192.168.56.4/repository/maven-releases/ \
-                          -Drepository.username=$NEXUS_USERNAME \
-                          -Drepository.password=$NEXUS_PASSWORD \
-                          -Dmaven.test.skip
-                        '''
-                    }
-                }
-            }
+     stage("Nexus") {
+    steps {
+        withCredentials([usernamePassword(credentialsId: '774b0f42-75e2-4ee5-8c86-e421249c4010', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+            sh """
+                mvn deploy -Durl=https://192.168.56.4/repository/maven-releases/ \
+                -Drepository.username=$NEXUS_USERNAME \
+                -Drepository.password=$NEXUS_PASSWORD \
+                -Dmaven.test.skip
+            """
         }
+    }
+}
     }
 
     post {
