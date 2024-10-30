@@ -48,20 +48,14 @@ pipeline {
             }
         }
 
-     stage("Nexus") {
-    steps {
-        withCredentials([usernamePassword(credentialsId: '060ea724-e8a2-4af6-8d96-c24a5f9d8dca', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-            sh """
-                mvn deploy -Durl=https://192.168.56.4/repository/maven-releases/ \
-                -Drepository.username=$NEXUS_USERNAME \
-                -Drepository.password=$NEXUS_PASSWORD \
-                -Dmaven.test.skip
-            """
-        }
+         stage("Nexus"){
+           steps{
+        sh "mvn deploy -Durl=https://192.168.56.4/repository/maven-releases/ -Drepository.username=admin -Drepository.password=Sassii260994 -Dmaven.test.skip"
+             }
+    
+    }
     }
 }
-    }
-
     post {
         always {
             echo 'Pipeline completed.'
