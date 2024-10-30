@@ -50,5 +50,22 @@ pipeline {
                 
             }
         }
+
+                stage('Build Docker Image') {
+            steps {
+                script {
+                    // Construire l'image Docker en utilisant le Dockerfile
+                    def image = docker.build("tpfoyer-app:latest")
+                }
+            }
+        }
+
+        stage('Run Docker Compose') {
+            steps {
+                echo "Starting the application and MySQL with Docker Compose"
+                sh 'docker-compose down'  // Arrêter les conteneurs précédents si nécessaires
+                sh 'docker-compose up -d --build'  // Construire et démarrer les conteneurs
+            }
+        }
     }
 }
