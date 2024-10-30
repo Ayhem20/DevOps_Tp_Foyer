@@ -62,8 +62,8 @@ pipeline {
                           -Dversion=5.0.0 \
                           -Dpackaging=jar \
                           -DgeneratePom=true \
-                          -Dusername=$NEXUS_USER \
-                          -Dpassword=$NEXUS_PASSWORD
+                          -Dusername=admin \
+                          -Dpassword=Sassii260994.
                         '''
                     }
                 }
