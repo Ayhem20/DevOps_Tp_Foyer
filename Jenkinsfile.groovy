@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy to Nexus') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: '774b0f42-75e2-4ee5-8c86-e421249c4010', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: '774b0f42-75e2-4ee5-8c86-e421249c4010', usernameVariable: 'admin', passwordVariable: 'Sassii260994.')]) {
                         sh '''
                         mvn deploy:deploy-file \
                           -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
@@ -62,8 +62,8 @@ pipeline {
                           -Dversion=5.0.0 \
                           -Dpackaging=jar \
                           -DgeneratePom=true \
-                          -Drepository.username=$NEXUS_USER \
-                          -Drepository.password=$NEXUS_PASSWORD \
+                          -Drepository.username=admin \
+                          -Drepository.password=Sassii260994. \
                           -Dmaven.test.skip=true
                         '''
                     }
