@@ -1,6 +1,5 @@
 pipeline {
     environment { 
-       
         MAVEN_OPTS = '-Xms256m -Xmx512m'
     }
 
@@ -9,14 +8,15 @@ pipeline {
     tools {
         jdk 'JAVA_HOME'
         maven 'M2_HOME'
-
     }
 
     stages {
         stage('Checkout Code from Git') {
             steps {
                 echo "Fetching Project from GitHub"
-                git branch: 'baha', url: 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git'
+                git branch: 'baha', 
+                    url: 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git', 
+                    credentialsId: 'GITbaha' // Ajoutez l'ID des identifiants ici
             }
         }
 
@@ -37,6 +37,8 @@ pipeline {
             }
         }
 
+        // Uncomment the stages below if needed
+
         // stage('Run JUnit and Mockito Tests') {
         //     steps {
         //         dir('backend') {  
@@ -52,9 +54,5 @@ pipeline {
         //         }
         //     }
         // }
-
-       
-
-    
-}
+    }
 }
