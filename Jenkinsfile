@@ -35,15 +35,13 @@ pipeline {
             }
         }
 
-        // Uncomment the stages below if needed
 
-        // stage('Run JUnit and Mockito Tests') {
-        //     steps {
-        //         dir('backend') {  
-        //             sh 'mvn test'
-        //         }
-        //     }
-        // }
+        stage('Run JUnit and Mockito Tests') {
+            steps {
+                    sh 'mvn test'
+                
+            }
+        }
 
         // stage('SonarQube Analysis') {
         //     steps {
