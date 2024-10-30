@@ -31,9 +31,7 @@ pipeline {
 
         stage('Build Backend Application') {
             steps {
-                dir('backend') {
                     sh "mvn clean package -DskipTests"
-                }
             }
         }
 
