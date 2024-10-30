@@ -37,8 +37,31 @@ pipeline {
         }
     }
 }
- 
+stages {
+        stage('Deploy to Nexus') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: '060ea724-e8a2-4af6-8d96-c24a5f9d8dca', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh '''
+                        mvn deploy:deploy-file \
+                          -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
+                          -DrepositoryId=nexus-repo \
+                          -Dfile=target/your-artifact.jar \
+                          -DgroupId=your.group.id \
+                          -DartifactId=your-artifact \
+                          -Dversion=1.0.0 \
+                          -Dpackaging=jar \
+                          -DgeneratePom=true \
+                          -Dusername=$NEXUS_USER \
+                          -Dpassword=$NEXUS_PASSWORD
+                        '''
+                    }
+                }
+            }
+        }
+    }
+}
  
 
-    }
+    
 }
