@@ -1,7 +1,19 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_HTTP_POST_BUFFER = "524288000"  // 500MB
+    }
+
     stages {
+        
+        stage('Prepare Git Config') {
+            steps {
+                // Increase buffer size for handling large transfers
+                sh 'git config --global http.postBuffer ${GIT_HTTP_POST_BUFFER}'
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 script {
