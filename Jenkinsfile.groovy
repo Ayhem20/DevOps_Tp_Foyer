@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_HTTP_POST_BUFFER = "524288000"  // 500MB
+        GIT_HTTP_POST_BUFFER = "1048576000"  // 500MB
     }
 
     stages {
