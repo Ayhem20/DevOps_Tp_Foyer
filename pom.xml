@@ -10,7 +10,11 @@
     </parent>
     <groupId>tn.esprit</groupId>
     <artifactId>tp-foyer</artifactId>
+<<<<<<< HEAD
     <version>5.0.4</version>
+=======
+    <version>5.0.2</version>
+>>>>>>> 115a05ac99b09a880271b421bc34bfd17c6caaad
     <name>tp-foyer</name>
     <description>tp-foyer</description>
     <properties>
