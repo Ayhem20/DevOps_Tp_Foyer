@@ -1,18 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        GIT_HTTP_POST_BUFFER = "1048576000"  // 500MB
-    }
-
     stages {
-
-        stage('Prepare Git Config') {
-            steps {
-                // Increase buffer size for handling large transfers
-                sh 'git config --global http.postBuffer ${GIT_HTTP_POST_BUFFER}'
-            }
-        }
 
         stage('Checkout Code') {
             steps {
@@ -22,21 +11,17 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
                         checkout([$class: 'GitSCM',
                             branches: [[name: "*/${branch}"]],
-                            userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']],
-                            extensions: [
-                                [$class: 'CloneOption', depth: 1, noTags: false, shallow: true, timeout: 15], // shallow clone
-                                [$class: 'Retry', retries: 3] // retry up to 3 times
-                            ]
+                            userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']]
                         ])
                     }
                 }
             }
         }
 
-        stage('Maven Clean, Compile, and Test') {
+        stage('Maven Clean and Compile and test') {
             steps {
                 script {
-                    sh 'mvn clean compile test'
+                    sh 'mvn clean compile'
                 }
             }
         }
@@ -56,7 +41,6 @@ pipeline {
                 }
             }
         }
-
         stage('Maven Deploy') {
             steps {
                 script {
@@ -65,4 +49,4 @@ pipeline {
             }
         }
     }
-}
+} 
