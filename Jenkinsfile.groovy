@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        
+
         stage('Prepare Git Config') {
             steps {
                 // Increase buffer size for handling large transfers
@@ -22,14 +22,18 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
                         checkout([$class: 'GitSCM',
                             branches: [[name: "*/${branch}"]],
-                            userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']]
+                            userRemoteConfigs: [[url: "${repoUrl}", credentialsId: '8f9b2f59-5031-4710-ba76-f57fadc1a5de']],
+                            extensions: [
+                                [$class: 'CloneOption', depth: 1, noTags: false, shallow: true, timeout: 15], // shallow clone
+                                [$class: 'Retry', retries: 3] // retry up to 3 times
+                            ]
                         ])
                     }
                 }
             }
         }
 
-        stage('Maven Clean and Compile and test') {
+        stage('Maven Clean, Compile, and Test') {
             steps {
                 script {
                     sh 'mvn clean compile test'
@@ -52,6 +56,7 @@ pipeline {
                 }
             }
         }
+
         stage('Maven Deploy') {
             steps {
                 script {
