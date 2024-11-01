@@ -27,6 +27,15 @@ pipeline {
             }
         }
 
+        // Stage to package the application into a JAR
+        stage('Maven Package') {
+            steps {
+                script {
+                    sh 'mvn package'
+                }
+            }
+        }
+
         // Stage to analyze code using SonarQube
         stage('SonarQube Analysis') {
             steps {
@@ -43,30 +52,15 @@ pipeline {
             }
         }
 
-        // Stage to deploy the JAR file to Nexus
-        stage('Deploy to Nexus') {
+       stage('Deploy to Nexus') {
             steps {
                 script {
-                    def jarFile = 'target/tp-foyer-5.0.0.jar'
-                    if (fileExists(jarFile)) {
-                        withCredentials([usernamePassword(credentialsId: '6caa081d-c871-4a56-9fe4-a5b70bafaa0b', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                            sh """
-                                mvn deploy:deploy-file \
-                                  -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
-                                  -DrepositoryId=deploymentRepo \
-                                  -Dfile=${jarFile} \
-                                  -DgroupId=tn.esprit \
-                                  -DartifactId=tp-foyer \
-                                  -Dversion=5.0.0 \
-                                  -Dpackaging=jar \
-                                  -DgeneratePom=true \
-                                  -Drepository.username=${NEXUS_USERNAME} \
-                                  -Drepository.password=${NEXUS_PASSWORD} \
-                                  -Dmaven.test.skip=true
-                            """
-                        }
-                    } else {
-                        echo "Le fichier JAR ${jarFile} est introuvable. Déploiement annulé."
+                    withCredentials([usernamePassword(credentialsId: '6caa081d-c871-4a56-9fe4-a5b70bafaa0b', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh '''
+                          mvn clean deploy 
+                          -DskipTests
+                         
+                        '''
                     }
                 }
             }
