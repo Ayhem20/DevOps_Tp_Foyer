@@ -48,5 +48,35 @@ pipeline {
                 }
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image using the Dockerfile
+                    sh "docker build -t ayhem42/tp-foyer:latest ."
+                }
+            }
+        }
+        stage('Push Docker Image to DockerHub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'a742dcf0-5d07-4e6f-9d98-7e8833da1070', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        // Login to DockerHub
+                        sh "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin"
+
+                        // Push the image to DockerHub
+                        sh "docker push ayhem42/tp-foyer:latest"
+                    }
+                }
+            }
+        }
+        stage('Docker Compose') {
+            steps {
+                script {
+                    echo "Running Docker Compose"
+                    sh 'docker compose up -d'
+                    sh 'docker compose down'
+                }
+            }
+        }
     }
 } 
