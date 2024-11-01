@@ -27,15 +27,6 @@ pipeline {
             }
         }
 
-        // Stage to package the application into a JAR
-        stage('Maven Package') {
-            steps {
-                script {
-                    sh 'mvn package'
-                }
-            }
-        }
-
         // Stage to analyze code using SonarQube
         stage('SonarQube Analysis') {
             steps {
@@ -66,7 +57,7 @@ pipeline {
                                   -Dfile=${jarFile} \
                                   -DgroupId=tn.esprit \
                                   -DartifactId=tp-foyer \
-                                  -Dversion=5.0 \
+                                  -Dversion=5.0.0 \
                                   -Dpackaging=jar \
                                   -DgeneratePom=true \
                                   -Drepository.username=${NEXUS_USERNAME} \
