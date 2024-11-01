@@ -66,7 +66,7 @@ pipeline {
                                   -Dfile=${jarFile} \
                                   -DgroupId=tn.esprit \
                                   -DartifactId=tp-foyer \
-                                  -Dversion=5.0.1 \
+                                  -Dversion=5.0 \
                                   -Dpackaging=jar \
                                   -DgeneratePom=true \
                                   -Drepository.username=${NEXUS_USERNAME} \
