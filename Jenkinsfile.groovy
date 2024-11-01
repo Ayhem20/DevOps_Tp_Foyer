@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile
-                    sh "docker build -f C:\\Users\\Msi\\Desktop\\tp-foyer -t ayhem42/tp-foyer:latest ."
+                    sh "docker build -t ayhem42/tp-foyer:latest ."
                 }
             }
         }
