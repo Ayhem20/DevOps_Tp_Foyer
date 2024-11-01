@@ -13,7 +13,7 @@ services:
       - mysql_db:/var/lib/mysql   # Persistent volume for MySQL data
 
   backend:
-    image: ayhem42/tp-foyer:lastest  # Replace with your built Spring Boot Docker image
+    image: ayhem42/tp-foyer:latest  # Replace with your built Spring Boot Docker image
     restart: on-failure
     depends_on:
       - mysql
