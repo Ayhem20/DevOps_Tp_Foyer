@@ -52,14 +52,13 @@ pipeline {
             }
         }
 
-       stage('Deploy to Nexus') {
+        // Stage to deploy to Nexus
+        stage('Deploy to Nexus') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: '6caa081d-c871-4a56-9fe4-a5b70bafaa0b', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                         sh '''
-                          mvn clean deploy 
-                          -DskipTests
-                         
+                          mvn clean deploy -DskipTests
                         '''
                     }
                 }
