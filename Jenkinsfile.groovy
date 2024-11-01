@@ -60,7 +60,18 @@ pipeline {
                     if (fileExists(jarFile)) {
                         withCredentials([usernamePassword(credentialsId: '6caa081d-c871-4a56-9fe4-a5b70bafaa0b', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                             sh """
-                              sh 'mvn clean deploy -DskipTests'
+                                mvn deploy:deploy-file \
+                                  -Durl=http://192.168.56.4:8081/repository/maven-releases/ \
+                                  -DrepositoryId=deploymentRepo \
+                                  -Dfile=${jarFile} \
+                                  -DgroupId=tn.esprit \
+                                  -DartifactId=tp-foyer \
+                                  -Dversion=5.0.1 \
+                                  -Dpackaging=jar \
+                                  -DgeneratePom=true \
+                                  -Drepository.username=${NEXUS_USERNAME} \
+                                  -Drepository.password=${NEXUS_PASSWORD} \
+                                  -Dmaven.test.skip=true
                             """
                         }
                     } else {
