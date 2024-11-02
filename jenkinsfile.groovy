@@ -47,7 +47,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: '608aa325-9043-49fb-afb2-6e953ec29495', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                         sh '''
                         mvn sonar:sonar \
                           -Dsonar.projectKey=DevOps_Tp_Foyer \
