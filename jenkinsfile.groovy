@@ -47,12 +47,12 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'SONAR_TOKEN1', variable: 'SONAR_TOKEN1')]) {
+                    withCredentials([string(credentialsId: 'SONAR_TOKEN1', variable: 'SONAR_TOKEN')]) {
                         sh '''
                         mvn sonar:sonar \
                           -Dsonar.projectKey=DevOps_Tp_Foyer \
                           -Dsonar.host.url=http://localhost:9001 \
-                          -Dsonar.login=$SONAR_TOKEN1
+                          -Dsonar.login=$SONAR_TOKEN
                         '''
                     }
                 }
