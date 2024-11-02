@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     stages {
-        // Stage to set up Git configuration
+        // Étape pour configurer Git
         stage('Setup Git Config') {
             steps {
-                // Configure Git buffer size
                 sh 'git config --global http.postBuffer 524288000'
             }
         }
 
-        // Stage to check out the code from GitHub
+        // Étape pour récupérer le code de GitHub
         stage('Checkout Code') {
             steps {
                 script {
@@ -25,5 +24,24 @@ pipeline {
                 }
             }
         }
+
+        // Étape pour nettoyer et compiler avec Maven
+        stage('Maven Clean and Compile') {
+            steps {
+                script {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+
+        // Étape pour empaqueter l'application dans un JAR avec Maven
+        stage('Maven Package') {
+            steps {
+                script {
+                    sh 'mvn package'
+                }
+            }
+        }
     }
 }
+
