@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        // Stage to set up Git configuration
+        stage('Setup Git Config') {
+            steps {
+                // Configure Git buffer size
+                sh 'git config --global http.postBuffer 524288000'
+            }
+        }
+
         // Stage to check out the code from GitHub
         stage('Checkout Code') {
             steps {
@@ -18,4 +26,4 @@ pipeline {
             }
         }
     }
-    }
+}
