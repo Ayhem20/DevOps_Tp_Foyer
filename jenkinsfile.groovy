@@ -44,19 +44,13 @@ pipeline {
         }
 
         // Étape pour analyser le code avec SonarQube
-        stage('SonarQube Analysis') {
+       
+         stage('MVN SONARQUBE') {
             steps {
-                script {
-                    withCredentials([string(credentialsId: 'SONAR_TOKEN1', variable: 'SONAR_TOKEN')]) {
-                        sh '''
-                        mvn sonar:sonar \
-                          -Dsonar.projectKey=DevOps_Tp_Foyer \
-                          -Dsonar.host.url=http://localhost:9001 \
-                          -Dsonar.login=$SONAR_TOKEN
-                        '''
-                    }
+                withCredentials([string(credentialsId: 'SONAR_TOKEN1', variable: 'SONAR_TOKEN')]) {
+                    sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
                 }
             }
         }
+        }
     }
-}
