@@ -68,10 +68,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                      <executions>
                     <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
+                       
                         <configuration>
                             <finalName>kaddem-0.0.1-SNAPSHOT</finalName>
                         </configuration>
