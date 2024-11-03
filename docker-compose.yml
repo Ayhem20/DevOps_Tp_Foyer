@@ -1,8 +1,31 @@
 version: '3.4'
 
 services:
-  tpfoyer:
-    image: tpfoyer
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+  db:
+    image: mysql:5.7
+    container_name: mysql_container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    image: myapp_image:latest  # Replace with your actual app image and tag
+    container_name: app_container
+    restart: on-failure
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mydb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: mypassword
+      SPRING_SERVER_PORT: 8083
+
+volumes:
+  db_data:
