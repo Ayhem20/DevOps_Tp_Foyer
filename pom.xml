@@ -12,7 +12,7 @@
     <artifactId>kaddem</artifactId>
     <name>kaddem</name>
     <description>kaddem</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
                  <version>2.7.5-SNAPSHOT</version>
 
     <properties>
