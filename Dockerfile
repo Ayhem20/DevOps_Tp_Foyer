@@ -1,4 +1,4 @@
-FROM docker/whalesay:latest
-LABEL Name=tpfoyer Version=0.0.1
-RUN apt-get -y update && apt-get install -y fortunes
-CMD ["sh", "-c", "/usr/games/fortune -a | cowsay"]
+FROM openjdk:17-jdk-alpine
+EXPOSE 8083
+ADD target/*.jar tp-foyer.jar
+ENTRYPOINT ["java", "-jar", "tp-foyer.jar"]
