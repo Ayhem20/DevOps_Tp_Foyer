@@ -12,6 +12,7 @@
     <artifactId>kaddem</artifactId>
     <name>kaddem</name>
     <description>kaddem</description>
+    <packaging>war</packaging>
     <properties>
         <java.version>1.8</java.version>
     </properties>
