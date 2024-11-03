@@ -44,15 +44,16 @@ pipeline {
         }
 
         // Étape pour analyser le code avec SonarQube
-        stage('MVN SONARQUBE') {
+       
+         stage('MVN SONARQUBE') {
             steps {
                 withCredentials([string(credentialsId: 'c27ceaee-5193-4a7c-988b-22150e0c3e9d', variable: 'SONAR_TOKEN')]) {
                     sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
                 }
             }
         }
-
-        // Étape pour déployer dans Nexus
+        
+          // Stage to deploy to Nexus
         stage('Deploy to Nexus') {
             steps {
                 script {
@@ -63,7 +64,8 @@ pipeline {
                     }
                 }
             }
-        }
+
     }
-}
+    }
+    }
 
