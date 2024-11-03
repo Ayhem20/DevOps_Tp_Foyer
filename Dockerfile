@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN mvn install
 
-FROM openjdk:17
+FROM openjdk:11
 WORKDIR /app
 COPY --from=build /app/target/kaddem-1.1.2.jar /app/
 EXPOSE 9055
