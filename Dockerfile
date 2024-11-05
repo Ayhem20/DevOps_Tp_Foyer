@@ -1,9 +1,6 @@
-FROM maven as build
+FROM maven:3.6.3-openjdk-11 as build
 WORKDIR /app
 COPY . .
-RUN mvn install
-
-FROM openjdk:11
 WORKDIR /app
 COPY --from=build /app/target/kaddem-1.1.2.jar /app/
 EXPOSE 9055
