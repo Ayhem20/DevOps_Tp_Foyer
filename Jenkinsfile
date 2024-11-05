@@ -65,5 +65,11 @@ pipeline {
                 sh 'docker-compose up -d --build'  // Construire et démarrer les conteneurs
             }
         }
+          stage('Deploy Backend to Nexus') {
+                    steps {
+
+                            sh 'mvn clean deploy -s /usr/share/maven/conf/settings.xml -DskipTests=true'
+                    }
+                }
     }
 }
