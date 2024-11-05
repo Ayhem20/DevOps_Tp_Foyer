@@ -3,6 +3,6 @@ WORKDIR /app
 COPY . .
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=build /app/target/kaddem-1.1.3.jar /app/
+COPY --from=build /app/target/kaddem-1.1.4.jar /app/
 EXPOSE 9055
-CMD {"java","jar","kaddem-1.1.3.jar"}
+CMD {"java","jar","kaddem-1.1.4.jar"}
