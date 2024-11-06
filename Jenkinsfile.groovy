@@ -17,7 +17,7 @@ pipeline {
                 }
             }
         }
-        stage('Maven Clean and Compile and test') {
+        stage('Maven test') {
             steps {
                 script {
                     sh 'mvn test'
