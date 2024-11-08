@@ -81,6 +81,13 @@ pipeline {
                 }
             }
         }
+
+        stage("Docker run"){
+           steps{
+                sh 'docker run -d -p 8089:8089 ayhem42/tp-foyer:latest'
+            }
+        }
+
         stage('Push Docker Image to DockerHub') {
             steps {
                 script {
@@ -94,6 +101,7 @@ pipeline {
                 }
             }
         }
+
         stage('Docker Compose') {
             steps {
                 script {
