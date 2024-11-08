@@ -52,17 +52,17 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         
         stage('Maven Deploy') {
             steps {
                 script {
-                    sh 'mvn clean deploy -DskipTests'
+                    sh "mvn deploy -Durl=https://192.168.33.10/repository/maven-releases/ -Drepository.username=admin -Drepository.password=ayhem568 -Dmaven.test.skip"
                 }
             }
         }
 
-        stage('Download JAR from Nexus') {
+        /*stage('Download JAR from Nexus') {
             steps {
                 script {
                     echo "Downloading JAR from Nexus"
