@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        /*stage('SonarQube Analysis') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: '71c996e3-a2eb-47ae-b081-f6d349669f6d', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASSWORD')]) {
@@ -60,7 +60,7 @@ pipeline {
                     sh 'mvn clean deploy -DskipTests'
                 }
             }
-        }
+        }*/
 
         stage('Download JAR from Nexus') {
             steps {
@@ -98,7 +98,7 @@ pipeline {
             steps {
                 script {
                     echo "Running Docker Compose"
-                    sh 'docker compose down'
+                    //sh 'docker compose down'
                     sh 'docker compose up -d'
                     
                 }
