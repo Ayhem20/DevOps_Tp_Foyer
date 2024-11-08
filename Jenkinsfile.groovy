@@ -60,7 +60,7 @@ pipeline {
                     sh 'mvn clean deploy -DskipTests'
                 }
             }
-        }*/
+        }
 
         stage('Download JAR from Nexus') {
             steps {
@@ -71,7 +71,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
         stage('Build Docker Image') {
             steps {
