@@ -1,4 +1,404 @@
 -------------------------------------------------------------------------------
 Test set: tn.esprit.tpfoyer.service.UniversiteServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.375 s -- in tn.esprit.tpfoyer.service.UniversiteServiceImplTest
+Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 1.779 s <<< FAILURE! -- in tn.esprit.tpfoyer.service.UniversiteServiceImplTest
+tn.esprit.tpfoyer.service.UniversiteServiceImplTest.modifyUniversite -- Time elapsed: 1.655 s <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: interface tn.esprit.tpfoyer.repository.UniversiteRepository.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 17
+JVM vendor name    : Oracle Corporation
+JVM vendor version : 17.0.8+9-LTS-211
+JVM name           : Java HotSpot(TM) 64-Bit Server VM
+JVM version        : 17.0.8+9-LTS-211
+JVM info           : mixed mode, sharing
+OS name            : Windows 10
+OS version         : 10.0
+
+
+Underlying exception : java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at tn.esprit.tpfoyer.service.UniversiteServiceImplTest.setUp(UniversiteServiceImplTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperInterfaces(ClassRepository.java:117)
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperInterfaces(ClassRepository.java:95)
+	at java.base/java.lang.Class.getGenericInterfaces(Class.java:1211)
+	at net.bytebuddy.description.type.TypeList$Generic$OfLoadedInterfaceTypes$TypeProjection.resolve(TypeList.java:823)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection$WithResolvedErasure.resolve(TypeDescription.java:6953)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.analyze(MethodGraph.java:710)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.compile(MethodGraph.java:668)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$AbstractBase.compile(MethodGraph.java:519)
+	at net.bytebuddy.dynamic.scaffold.MethodRegistry$Default.prepare(MethodRegistry.java:472)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:212)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:203)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$UsingTypeWriter.make(DynamicType.java:4055)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase.make(DynamicType.java:3739)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$Delegator.make(DynamicType.java:3991)
+	at org.mockito.internal.creation.bytebuddy.SubclassBytecodeGenerator.mockClass(SubclassBytecodeGenerator.java:288)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:47)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:40)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMockType(SubclassByteBuddyMockMaker.java:77)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMock(SubclassByteBuddyMockMaker.java:43)
+	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.createMock(ByteBuddyMockMaker.java:42)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:53)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:96)
+	at org.mockito.Mockito.mock(Mockito.java:1965)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:66)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:27)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:24)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:73)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: tn.esprit.tpfoyer.entity.Universite
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114)
+	... 48 more
+
+tn.esprit.tpfoyer.service.UniversiteServiceImplTest.addUniversite -- Time elapsed: 0.007 s <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: interface tn.esprit.tpfoyer.repository.UniversiteRepository.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 17
+JVM vendor name    : Oracle Corporation
+JVM vendor version : 17.0.8+9-LTS-211
+JVM name           : Java HotSpot(TM) 64-Bit Server VM
+JVM version        : 17.0.8+9-LTS-211
+JVM info           : mixed mode, sharing
+OS name            : Windows 10
+OS version         : 10.0
+
+
+Underlying exception : java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at tn.esprit.tpfoyer.service.UniversiteServiceImplTest.setUp(UniversiteServiceImplTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperInterfaces(ClassRepository.java:117)
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperInterfaces(ClassRepository.java:95)
+	at java.base/java.lang.Class.getGenericInterfaces(Class.java:1211)
+	at net.bytebuddy.description.type.TypeList$Generic$OfLoadedInterfaceTypes$TypeProjection.resolve(TypeList.java:823)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection$WithResolvedErasure.resolve(TypeDescription.java:6953)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.analyze(MethodGraph.java:710)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.compile(MethodGraph.java:668)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$AbstractBase.compile(MethodGraph.java:519)
+	at net.bytebuddy.dynamic.scaffold.MethodRegistry$Default.prepare(MethodRegistry.java:472)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:212)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:203)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$UsingTypeWriter.make(DynamicType.java:4055)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase.make(DynamicType.java:3739)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$Delegator.make(DynamicType.java:3991)
+	at org.mockito.internal.creation.bytebuddy.SubclassBytecodeGenerator.mockClass(SubclassBytecodeGenerator.java:288)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:47)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:40)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMockType(SubclassByteBuddyMockMaker.java:77)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMock(SubclassByteBuddyMockMaker.java:43)
+	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.createMock(ByteBuddyMockMaker.java:42)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:53)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:96)
+	at org.mockito.Mockito.mock(Mockito.java:1965)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:66)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:27)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:24)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:73)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: tn.esprit.tpfoyer.entity.Universite
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114)
+	... 48 more
+
+tn.esprit.tpfoyer.service.UniversiteServiceImplTest.retrieveUniversite -- Time elapsed: 0.006 s <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: interface tn.esprit.tpfoyer.repository.UniversiteRepository.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 17
+JVM vendor name    : Oracle Corporation
+JVM vendor version : 17.0.8+9-LTS-211
+JVM name           : Java HotSpot(TM) 64-Bit Server VM
+JVM version        : 17.0.8+9-LTS-211
+JVM info           : mixed mode, sharing
+OS name            : Windows 10
+OS version         : 10.0
+
+
+Underlying exception : java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at tn.esprit.tpfoyer.service.UniversiteServiceImplTest.setUp(UniversiteServiceImplTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperInterfaces(ClassRepository.java:117)
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperInterfaces(ClassRepository.java:95)
+	at java.base/java.lang.Class.getGenericInterfaces(Class.java:1211)
+	at net.bytebuddy.description.type.TypeList$Generic$OfLoadedInterfaceTypes$TypeProjection.resolve(TypeList.java:823)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection$WithResolvedErasure.resolve(TypeDescription.java:6953)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.analyze(MethodGraph.java:710)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.compile(MethodGraph.java:668)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$AbstractBase.compile(MethodGraph.java:519)
+	at net.bytebuddy.dynamic.scaffold.MethodRegistry$Default.prepare(MethodRegistry.java:472)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:212)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:203)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$UsingTypeWriter.make(DynamicType.java:4055)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase.make(DynamicType.java:3739)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$Delegator.make(DynamicType.java:3991)
+	at org.mockito.internal.creation.bytebuddy.SubclassBytecodeGenerator.mockClass(SubclassBytecodeGenerator.java:288)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:47)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:40)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMockType(SubclassByteBuddyMockMaker.java:77)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMock(SubclassByteBuddyMockMaker.java:43)
+	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.createMock(ByteBuddyMockMaker.java:42)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:53)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:96)
+	at org.mockito.Mockito.mock(Mockito.java:1965)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:66)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:27)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:24)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:73)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: tn.esprit.tpfoyer.entity.Universite
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114)
+	... 48 more
+
+tn.esprit.tpfoyer.service.UniversiteServiceImplTest.retrieveAllUniversites -- Time elapsed: 0.006 s <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: interface tn.esprit.tpfoyer.repository.UniversiteRepository.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 17
+JVM vendor name    : Oracle Corporation
+JVM vendor version : 17.0.8+9-LTS-211
+JVM name           : Java HotSpot(TM) 64-Bit Server VM
+JVM version        : 17.0.8+9-LTS-211
+JVM info           : mixed mode, sharing
+OS name            : Windows 10
+OS version         : 10.0
+
+
+Underlying exception : java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at tn.esprit.tpfoyer.service.UniversiteServiceImplTest.setUp(UniversiteServiceImplTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperInterfaces(ClassRepository.java:117)
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperInterfaces(ClassRepository.java:95)
+	at java.base/java.lang.Class.getGenericInterfaces(Class.java:1211)
+	at net.bytebuddy.description.type.TypeList$Generic$OfLoadedInterfaceTypes$TypeProjection.resolve(TypeList.java:823)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection$WithResolvedErasure.resolve(TypeDescription.java:6953)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.analyze(MethodGraph.java:710)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.compile(MethodGraph.java:668)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$AbstractBase.compile(MethodGraph.java:519)
+	at net.bytebuddy.dynamic.scaffold.MethodRegistry$Default.prepare(MethodRegistry.java:472)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:212)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:203)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$UsingTypeWriter.make(DynamicType.java:4055)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase.make(DynamicType.java:3739)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$Delegator.make(DynamicType.java:3991)
+	at org.mockito.internal.creation.bytebuddy.SubclassBytecodeGenerator.mockClass(SubclassBytecodeGenerator.java:288)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:47)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:40)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMockType(SubclassByteBuddyMockMaker.java:77)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMock(SubclassByteBuddyMockMaker.java:43)
+	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.createMock(ByteBuddyMockMaker.java:42)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:53)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:96)
+	at org.mockito.Mockito.mock(Mockito.java:1965)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:66)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:27)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:24)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:73)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: tn.esprit.tpfoyer.entity.Universite
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114)
+	... 48 more
+
+tn.esprit.tpfoyer.service.UniversiteServiceImplTest.removeUniversite -- Time elapsed: 0.006 s <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: interface tn.esprit.tpfoyer.repository.UniversiteRepository.
+
+Mockito can only mock non-private & non-final classes.
+If you're not sure why you're getting this error, please report to the mailing list.
+
+
+Java               : 17
+JVM vendor name    : Oracle Corporation
+JVM vendor version : 17.0.8+9-LTS-211
+JVM name           : Java HotSpot(TM) 64-Bit Server VM
+JVM version        : 17.0.8+9-LTS-211
+JVM info           : mixed mode, sharing
+OS name            : Windows 10
+OS version         : 10.0
+
+
+Underlying exception : java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at tn.esprit.tpfoyer.service.UniversiteServiceImplTest.setUp(UniversiteServiceImplTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.TypeNotPresentException: Type tn.esprit.tpfoyer.entity.Universite not present
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68)
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138)
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperInterfaces(ClassRepository.java:117)
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperInterfaces(ClassRepository.java:95)
+	at java.base/java.lang.Class.getGenericInterfaces(Class.java:1211)
+	at net.bytebuddy.description.type.TypeList$Generic$OfLoadedInterfaceTypes$TypeProjection.resolve(TypeList.java:823)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection$WithResolvedErasure.resolve(TypeDescription.java:6953)
+	at net.bytebuddy.description.type.TypeDescription$Generic$LazyProjection.accept(TypeDescription.java:6301)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.analyze(MethodGraph.java:710)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.doAnalyze(MethodGraph.java:746)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$Default.compile(MethodGraph.java:668)
+	at net.bytebuddy.dynamic.scaffold.MethodGraph$Compiler$AbstractBase.compile(MethodGraph.java:519)
+	at net.bytebuddy.dynamic.scaffold.MethodRegistry$Default.prepare(MethodRegistry.java:472)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:212)
+	at net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder.toTypeWriter(SubclassDynamicTypeBuilder.java:203)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$UsingTypeWriter.make(DynamicType.java:4055)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase.make(DynamicType.java:3739)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$Delegator.make(DynamicType.java:3991)
+	at org.mockito.internal.creation.bytebuddy.SubclassBytecodeGenerator.mockClass(SubclassBytecodeGenerator.java:288)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:47)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:40)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMockType(SubclassByteBuddyMockMaker.java:77)
+	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.createMock(SubclassByteBuddyMockMaker.java:43)
+	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.createMock(ByteBuddyMockMaker.java:42)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:53)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:96)
+	at org.mockito.Mockito.mock(Mockito.java:1965)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:66)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:27)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:24)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:73)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: tn.esprit.tpfoyer.entity.Universite
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114)
+	... 48 more
+

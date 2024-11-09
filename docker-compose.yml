@@ -3,7 +3,7 @@ services:
   app:
     build: .
     ports:
-      - "8034:8089"
+      - "8034:8083"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db?createDatabaseIfNotExist=true  # Utilise 'mysql' comme hôte
       - SPRING_DATASOURCE_USERNAME=root
