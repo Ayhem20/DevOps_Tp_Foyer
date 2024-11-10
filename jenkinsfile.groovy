@@ -28,40 +28,44 @@ pipeline {
         // Étape pour nettoyer et compiler avec Maven
         stage('Maven Clean and Compile') {
             steps {
-                sh 'mvn clean compile'
+                script {
+                    sh 'mvn clean compile'
+                }
             }
         }
 
         // Étape pour empaqueter l'application dans un JAR avec Maven
         stage('Maven Package') {
             steps {
-                sh 'mvn package'
+                script {
+                    sh 'mvn package'
+                }
             }
         }
 
         // Étape pour analyser le code avec SonarQube
-        stage('MVN SONARQUBE') {
+       
+         stage('MVN SONARQUBE') {
             steps {
                 withCredentials([string(credentialsId: 'c27ceaee-5193-4a7c-988b-22150e0c3e9d', variable: 'SONAR_TOKEN')]) {
                     sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
                 }
             }
         }
-
-        // Étape pour déployer sur Nexus
+        
+          // Stage to deploy to Nexus
         stage('Deploy to Nexus') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'a278b6b7-0941-4825-a111-0459663e9bc5', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
-                    sh 'mvn clean deploy -DskipTests'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'a278b6b7-0941-4825-a111-0459663e9bc5', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh '''
+                          mvn clean deploy -DskipTests
+                        '''
+                    }
                 }
             }
-        }
 
-        // Étape pour construire l'image Docker
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t ibtihelgr/alpine:latest .'
-            }
-        }
     }
-}
+    }
+    }
+
