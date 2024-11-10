@@ -28,14 +28,18 @@ pipeline {
         // Étape pour nettoyer et compiler avec Maven
         stage('Maven Clean and Compile') {
             steps {
-                sh 'mvn clean compile'
+                script {
+                    sh 'mvn clean compile'
+                }
             }
         }
 
         // Étape pour empaqueter l'application dans un JAR avec Maven
         stage('Maven Package') {
             steps {
-                sh 'mvn package'
+                script {
+                    sh 'mvn package'
+                }
             }
         }
 
@@ -51,8 +55,10 @@ pipeline {
         // Étape pour déployer sur Nexus
         stage('Deploy to Nexus') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'a278b6b7-0941-4825-a111-0459663e9bc5', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
-                    sh 'mvn clean deploy -DskipTests'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'a278b6b7-0941-4825-a111-0459663e9bc5', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh 'mvn clean deploy -DskipTests'
+                    }
                 }
             }
         }
@@ -61,7 +67,6 @@ pipeline {
         stage('Building Image') {
             steps {
                 script {
-                    // Construire l'image Docker
                     sh 'docker build -t ibtihelgr/alpine:latest .'
                 }
             }
@@ -70,11 +75,24 @@ pipeline {
         // Étape pour déployer l'image Docker sur DockerHub
         stage('Deploy Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: '57d779b6-7114-4142-977c-9b93fff27676', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh '''
-                        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                        docker push ibtihelgr/alpine:latest
-                    '''
+                script {
+                    withCredentials([usernamePassword(credentialsId: '57d779b6-7114-4142-977c-9b93fff27676', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                            docker push ibtihelgr/alpine:latest
+                        '''
+                    }
+                }
+            }
+        }
+
+        // Étape Docker Compose
+        stage('Docker Compose') {
+            steps {
+                script {
+                    echo "Running Docker Compose"
+                    // Lancer les conteneurs en arrière-plan
+                    sh 'docker compose up -d'
                 }
             }
         }
