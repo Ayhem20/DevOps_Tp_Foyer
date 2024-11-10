@@ -72,6 +72,17 @@ pipeline {
             }
         }
 
+        // Étape pour pré-télécharger les images nécessaires (gestion du timeout)
+        stage('Pre-Pull Docker Images') {
+            steps {
+                script {
+                    // Remplacez "myapp_image:latest" par le nom de votre image si elle est manquante
+                    sh 'docker pull ibtihelgr/alpine:latest || true'
+                    // Vous pouvez ajouter ici d'autres images à pré-télécharger si besoin
+                }
+            }
+        }
+
         // Étape pour déployer l'image Docker sur DockerHub
         stage('Deploy Image') {
             steps {
