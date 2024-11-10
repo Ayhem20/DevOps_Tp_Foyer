@@ -80,6 +80,11 @@ pipeline {
                 }
             }
         }
+        stage("Docker run"){
+            steps{
+                sh 'docker run -d -p 8083:8083 chaimasassi/tp-foyer:latest'
+            }
+        }
 
         // Stage to deploy the Docker image to DockerHub
         stage('Deploy Image') {
