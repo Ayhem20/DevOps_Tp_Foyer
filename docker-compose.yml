@@ -2,14 +2,13 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:5.7
+    image: mysql:latest
     container_name: mysql_container
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: Sassii260994
-      MYSQL_DATABASE: tp_foyer_db
-      MYSQL_USER: chaimasassi
-      MYSQL_PASSWORD: Sassii260994
+      MYSQL_ROOT_PASSWORD:
+
+
     ports:
       - "3307:3306"
     volumes:
@@ -17,15 +16,16 @@ services:
 
   app:
     image: chaimasassi/tp-foyer:latest  # Make sure this image tag is correct
-    container_name: app_container
     restart: on-failure
+    depends_on :
+      - db
     ports:
       - "8083:8083"
-    
+
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tp_foyer_db?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: chaimasassi
-      SPRING_DATASOURCE_PASSWORD: Sassii260994
+
+      SPRING_DATASOURCE_PASSWORD:
       SPRING_SERVER_PORT: 8083
 
 volumes:
