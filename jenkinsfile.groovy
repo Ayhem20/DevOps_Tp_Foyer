@@ -81,7 +81,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: '57d779b6-7114-4142-977c-9b93fff27676', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                            docker push chaimasassi/tp-foyer:latest
+                            docker push ibtihelgr/alpine:latest
                         '''
                     }
                 }
