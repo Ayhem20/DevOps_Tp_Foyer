@@ -8,8 +8,6 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: tp_foyer_db
-
-
     ports:
       - "3307:3306"
     volumes:
@@ -18,14 +16,17 @@ services:
   app:
     image: chaimasassi/tp-foyer:latest
     restart: on-failure
-    depends_on :
+    depends_on:
       - db
     ports:
       - "8083:8083"
-
     environment:
-
-      MYSQL_ROOT_PASSWORD: ""
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tp_foyer_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
 
 volumes:
   db_data:
