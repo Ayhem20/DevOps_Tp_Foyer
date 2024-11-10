@@ -80,7 +80,7 @@ pipeline {
                 }
             }
         }
-      
+
 
         // Stage to deploy the Docker image to DockerHub
         stage('Deploy Image') {
