@@ -4,7 +4,7 @@ pipeline {
         NEXUS_URL = 'http://localhost:8081/repository/maven-releases/tn/esprit/tp-foyer/5.0.4/tp-foyer-5.0.4.jar' // The Nexus URL for the JAR file
         JAR_FILE = 'tp-foyer-5.0.4.jar' // The name of the JAR file to download
     }
-//////////////
+////////////////////
     stages {
 
         stage('Checkout Code') {
