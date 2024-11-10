@@ -15,7 +15,7 @@ services:
       - db_data:/var/lib/mysql
 
   app:
-    image: chaimasassi/tp-foyer:latest  # Make sure this image tag is correct
+    image: chaimasassi/tp-foyer:latest
     restart: on-failure
     depends_on :
       - db
