@@ -64,6 +64,30 @@ pipeline {
                     }
                 }
             }
+         // Stage to build the Docker image
+        stage('Building Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh 'docker build -t ibtihelgr/alpine:latest .'
+                }
+            }
+        }
+
+        // Stage to deploy the Docker image to DockerHub
+        stage('Deploy Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: '57d779b6-7114-4142-977c-9b93fff27676', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                            docker push chaimasassi/tp-foyer:latest
+                        '''
+                    }
+                }
+            }
+        }
+        
 
     }
     }
