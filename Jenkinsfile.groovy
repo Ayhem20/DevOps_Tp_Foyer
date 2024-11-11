@@ -27,5 +27,20 @@ pipeline {
                 }
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: '88c62664-596c-422b-9324-f7664ad46b5f', variable: 'SONAR_TOKEN')]) {
+                        sh '''
+                        mvn sonar:sonar \
+                          -Dsonar.projectKey=DevOps_Tp_Foyer \
+                          -Dsonar.host.url=http://192.168.56.4:9000 \
+                          -Dsonar.login=$SONAR_TOKEN
+                        '''
+                    }
+                }
+            }
+        }
 }
 }
