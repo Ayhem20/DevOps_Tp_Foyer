@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.service;
 
+import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.entity.Reservation;
 
 import java.util.Date;
@@ -15,4 +16,15 @@ public interface IReservationService {
 
     // Here we will add later methods calling keywords and methods calling JPQL
     public List<Reservation> trouverResSelonDateEtStatus(Date d, boolean b);
+
+    List<Reservation> trouverReservationsParEtudiant(Etudiant etudiant);
+
+    List<Reservation> trouverReservationsValidesParAnnee(Date anneeUniversitaire);
+
+    long compterTotalReservations();
+
+    long compterReservationsParAnnee(Date anneeUniversitaire);
+
+    boolean etudiantAReservation(Etudiant etudiant, Date anneeUniversitaire);
+
 }

@@ -3,7 +3,9 @@ package tn.esprit.tpfoyer.control;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.entity.Reservation;
+import tn.esprit.tpfoyer.service.IEtudiantService;
 import tn.esprit.tpfoyer.service.IReservationService;
 
 import java.util.Date;
@@ -15,6 +17,8 @@ import java.util.List;
 public class ReservationRestController {
 
     IReservationService reservationService;
+    private final IEtudiantService etudiantService; // Assurez-vous d'avoir un service pour gérer les étudiants
+
 
     // http://localhost:8089/tpfoyer/reservation/retrieve-all-reservations
     @GetMapping("/retrieve-all-reservations")
@@ -69,6 +73,32 @@ public class ReservationRestController {
     public Reservation modifyReservation(@RequestBody Reservation r) {
         Reservation reservation = reservationService.modifyReservation(r);
         return reservation;
+    }
+    @GetMapping("/trouver-reservations-par-etudiant/{etudiantId}")
+    public List<Reservation> trouverReservationsParEtudiant(@PathVariable("etudiantId") long etudiantId) {
+        Etudiant etudiant = etudiantService.retrieveEtudiant(etudiantId);
+        return reservationService.trouverReservationsParEtudiant(etudiant);
+    }
+
+    @GetMapping("/trouver-reservations-valides/{annee}")
+    public List<Reservation> trouverReservationsValides(@PathVariable("annee") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date annee) {
+        return reservationService.trouverReservationsValidesParAnnee(annee);
+    }
+
+    @GetMapping("/compter-total-reservations")
+    public long compterTotalReservations() {
+        return reservationService.compterTotalReservations();
+    }
+
+    @GetMapping("/compter-reservations-par-annee/{annee}")
+    public long compterReservationsParAnnee(@PathVariable("annee") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date annee) {
+        return reservationService.compterReservationsParAnnee(annee);
+    }
+
+    @GetMapping("/verifier-reservation-etudiant/{etudiantId}/{annee}")
+    public boolean verifierReservationEtudiant(@PathVariable("etudiantId") long etudiantId, @PathVariable("annee") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date annee) {
+        Etudiant etudiant = etudiantService.retrieveEtudiant(etudiantId);
+        return reservationService.etudiantAReservation(etudiant, annee);
     }
 
 }

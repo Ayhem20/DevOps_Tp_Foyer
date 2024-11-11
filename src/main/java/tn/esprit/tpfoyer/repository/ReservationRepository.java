@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.entity.Reservation;
 
 import java.util.Date;
@@ -22,6 +23,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, String
     /* Keywords : */
 
     List<Reservation> findAllByAnneeUniversitaireBeforeAndEstValide(Date d, boolean b );
+
+    List<Reservation> findByEtudiants(Etudiant etudiant);
+
+    List<Reservation> findByAnneeUniversitaireAndEstValide(Date anneeUniversitaire, boolean estValide);
 
 }
 
