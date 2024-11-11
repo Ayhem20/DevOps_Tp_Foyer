@@ -14,9 +14,11 @@ pipeline {
         stage('Checkout Code from Git') {
             steps {
                 echo "Fetching Project from GitHub"
-                git branch: 'baha',
+                git(
+                    branch: 'baha',
                     url: 'https://github.com/Ayhem20/DevOps_Tp_Foyer.git',
                     credentialsId: 'GITbaha' // Ajoutez l'ID des identifiants ici
+                )
             }
         }
 
@@ -31,27 +33,23 @@ pipeline {
 
         stage('Build Backend Application') {
             steps {
-                    sh "mvn clean package -DskipTests"
+                sh "mvn clean package -DskipTests"
             }
         }
 
-
         stage('Run JUnit and Mockito Tests') {
             steps {
-                    sh 'mvn test'
-
+                sh 'mvn test'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-
-                    sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
         }
 
-      stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 echo "Building Docker Image"
                 sh 'docker build -t tpfoyer-app:latest .'
@@ -61,54 +59,36 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 echo "Starting the application and MySQL with Docker Compose"
-                sh 'docker-compose down'  // Arrêter les conteneurs précédents si nécessaires
-                sh 'docker-compose up -d --build'  // Construire et démarrer les conteneurs
+                sh 'docker-compose down' // Arrêter les conteneurs précédents si nécessaire
+                sh 'docker-compose up -d --build' // Construire et démarrer les conteneurs
             }
         }
-          stage('Deploy Backend to Nexus') {
-                    steps {
 
-                            sh 'mvn clean deploy -s /usr/share/maven/conf/settings.xml -DskipTests=true'
-                    }
-                }
-                 post {
-                            always {
-                                emailext to: "baha.adouania@esprit.tn",
-                                    subject: "jenkins build: ${currentBuild.currentResult}: ${env.JOB_NAME}",
-                                    body: """
-                                    Bonjour Baha Adouania,
-
-                                    Le résultat de la dernière exécution du job Jenkins est : ${currentBuild.currentResult}
-
-                                    Plus d'informations peuvent être trouvées ici : ${env.BUILD_URL}
-
-                                    Cordialement,
-                                    Jenkins
-                                    """,
-                                    from: "Baha Adouania <baha.adouania@esprit.tn>",
-                                    attachLog: true
-                            }
-                        }
+        stage('Deploy Backend to Nexus') {
+            steps {
+                sh 'mvn clean deploy -s /usr/share/maven/conf/settings.xml -DskipTests=true'
+            }
+        }
     }
 
     post {
-            always {
-                emailext(
-                    to: "baha.adouania@esprit.tn",
-                    subject: "Jenkins Build: ${currentBuild.currentResult}: ${env.JOB_NAME}",
-                    body: """
-                    Bonjour Baha Adouania,
+        always {
+            emailext(
+                to: "baha.adouania@esprit.tn",
+                subject: "Jenkins Build: ${currentBuild.currentResult}: ${env.JOB_NAME}",
+                body: """
+                Bonjour Baha Adouania,
 
-                    Le résultat de la dernière exécution du job Jenkins est : ${currentBuild.currentResult}
+                Le résultat de la dernière exécution du job Jenkins est : ${currentBuild.currentResult}
 
-                    Plus d'informations peuvent être trouvées ici : ${env.BUILD_URL}
+                Plus d'informations peuvent être trouvées ici : ${env.BUILD_URL}
 
-                    Cordialement,
-                    Jenkins
-                    """,
-                    from: "Baha Adouania <baha.adouania@esprit.tn>",
-                    attachLog: true
-                )
-            }
+                Cordialement,
+                Jenkins
+                """,
+                from: "Baha Adouania <baha.adouania@esprit.tn>",
+                attachLog: true
+            )
         }
+    }
 }
