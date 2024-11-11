@@ -55,5 +55,44 @@ pipeline {
                 }
             }
         }
+
+        // Stage to build the Docker image
+        stage('Building Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh 'docker build -t chamsdinemadouri/tp-foyer:latest .'
+                }
+            }
+        }
+
+
+        // Stage to deploy the Docker image to DockerHub
+        stage('Deploy Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: '3c168149-af55-4bba-a837-2168cd17aa74', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                            docker push chamsdinemadouri/tp-foyer:latest
+                        '''
+                    }
+                }
+            }
+        }
+
+        // Stage to run Docker Compose for deployment
+        stage('Docker Compose') {
+            steps {
+                script {
+                    echo "Running Docker Compose"
+                    sh 'docker compose up -d'
+                   // sh 'docker compose down'
+
+                    
+                }
+            }
+        }
+    }
 }
 }
