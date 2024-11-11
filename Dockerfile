@@ -1,18 +1,17 @@
-# Utiliser une image de base avec Java 17
-FROM openjdk:17-jdk-alpine
+# Use a base image with Java 17
+FROM openjdk:17-jdk-slim
 
-# Définir les variables d'environnement pour l'application
+# Set environment variables for the application
 ENV SPRING_PROFILES_ACTIVE=prod
 
-# Créer un répertoire pour l'application
+# Create a directory for the application
 WORKDIR /app
 
-# Copier le fichier JAR depuis le répertoire local vers l'image Docker
+# Copy the JAR file from the local machine to the Docker image
 COPY target/tp-foyer-6.0.0.jar /app/tp-foyer-6.0.0.jar
 
-# Exposer le port de l'application
+# Expose the application port
 EXPOSE 8089
 
-# Définir le point d'entrée pour l'application
+# Define the entry point for the application
 ENTRYPOINT ["java", "-jar", "/app/tp-foyer-6.0.0.jar"]
-
