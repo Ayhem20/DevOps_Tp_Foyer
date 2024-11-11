@@ -20,6 +20,14 @@ pipeline {
             }
         }
 
+        stage('Maven test') {
+            steps {
+                script {
+                    sh 'mvn test'
+                }
+            }
+        }
+
         stage('Maven Clean and Compile') {
             steps {
                 script {
