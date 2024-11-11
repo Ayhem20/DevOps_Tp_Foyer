@@ -71,6 +71,26 @@ pipeline {
                             sh 'mvn clean deploy -s /usr/share/maven/conf/settings.xml -DskipTests=true'
                     }
                 }
-                
+
     }
+    post {
+            always {
+                emailext(
+                    to: "baha.adouania@esprit.tn",
+                    subject: "Jenkins Build: ${currentBuild.currentResult}: ${env.JOB_NAME}",
+                    body: """
+                    Bonjour Baha Adouania,
+
+                    Le résultat de la dernière exécution du job Jenkins est : ${currentBuild.currentResult}
+
+                    Plus d'informations peuvent être trouvées ici : ${env.BUILD_URL}
+
+                    Cordialement,
+                    Jenkins
+                    """,
+                    from: "Baha Adouania <baha.adouania@esprit.tn>",
+                    attachLog: true
+                )
+            }
+        }
 }
