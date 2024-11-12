@@ -1,5 +1,5 @@
 # Utilisez une image de base avec OpenJDK 17 pour exécuter une application Spring Boot
-FROM openjdk:17-jdk-rachid
+FROM openjdk:17-jdk
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
