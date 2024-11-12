@@ -2,92 +2,156 @@ package tn.esprit.tpfoyer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.test.annotation.Rollback;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.repository.BlocRepository;
 import tn.esprit.tpfoyer.service.BlocServiceImpl;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@ActiveProfiles("test")  // Utilise le profil de test pour charger application-test.properties
-@TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
 public class BlocServiceImplTest {
 
-    @Autowired
-    BlocServiceImpl blocService;
+    @InjectMocks
+    private BlocServiceImpl blocService;
 
-    @Autowired
-    BlocRepository blocRepository;
+    @Mock
+    private BlocRepository blocRepository;
 
     @BeforeEach
-    void setUp() {
-        // Vider la base de données avant chaque test
-        blocRepository.deleteAll();
+    public void setup() {
+        MockitoAnnotations.openMocks(this); // Initializes the mocks
     }
 
     @Test
-    @Order(1)
-    @Transactional
-    @Rollback
-    void testAddBloc() {
-        Bloc bloc = new Bloc(0L, "Bloc B", 200L, null, null);
-        Bloc savedBloc = blocService.addBloc(bloc);
-        assertNotNull(savedBloc);
-        assertTrue(savedBloc.getIdBloc() > 0);
-    }
+    public void testRetrieveAllBlocs() {
+        // Arrange
+        Bloc bloc1 = new Bloc();
+        Bloc bloc2 = new Bloc();
+        when(blocRepository.findAll()).thenReturn(Arrays.asList(bloc1, bloc2));
 
-    @Test
-    @Order(2)
-    void testRetrieveAllBlocs() {
+        // Act
         List<Bloc> blocs = blocService.retrieveAllBlocs();
-        assertNotNull(blocs);
-        assertTrue(blocs.isEmpty() || blocs.size() > 1);
+
+        // Assert
+        assertEquals(2, blocs.size());
+        verify(blocRepository, times(1)).findAll();
     }
 
     @Test
-    @Order(3)
-    @Transactional
-    @Rollback
-    void testRetrieveBlocById() {
-        Bloc bloc = new Bloc(0L, "Bloc C", 150L, null, null);
-        Bloc savedBloc = blocService.addBloc(bloc);
+    public void testRetrieveBlocsSelonCapacite() {
+        // Arrange
+        Bloc bloc1 = new Bloc();
+        bloc1.setCapaciteBloc(100);
+        Bloc bloc2 = new Bloc();
+        bloc2.setCapaciteBloc(50);
+        when(blocRepository.findAll()).thenReturn(Arrays.asList(bloc1, bloc2));
 
-        Bloc retrievedBloc = blocService.retrieveBloc(savedBloc.getIdBloc());
-        assertNotNull(retrievedBloc);
-        assertEquals("Bloc C", retrievedBloc.getNomBloc());
+        // Act
+        List<Bloc> blocs = blocService.retrieveBlocsSelonCapacite(60);
+
+        // Assert
+        assertEquals(1, blocs.size());
+        assertTrue(blocs.contains(bloc1));
+        assertFalse(blocs.contains(bloc2));
+        verify(blocRepository, times(1)).findAll();
     }
 
     @Test
-    @Order(4)
-    @Transactional
-    @Rollback
-    void testModifyBloc() {
-        Bloc bloc = new Bloc(0L, "Bloc D", 300L, null, null);
-        Bloc savedBloc = blocService.addBloc(bloc);
-        savedBloc.setCapaciteBloc(400L);
+    public void testRetrieveBloc() {
+        // Arrange
+        Bloc bloc = new Bloc();
+        bloc.setIdBloc(1L);
 
-        Bloc updatedBloc = blocService.modifyBloc(savedBloc);
-        assertEquals(400L, updatedBloc.getCapaciteBloc());
+        when(blocRepository.findById(1L)).thenReturn(Optional.of(bloc));
+
+        // Act
+        Bloc result = blocService.retrieveBloc(1L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1L, result.getIdBloc());
+        verify(blocRepository, times(1)).findById(1L);
     }
 
     @Test
-    @Order(5)
-    @Transactional
-    @Rollback
-    void testRemoveBloc() {
-        Bloc bloc = new Bloc(0L, "Bloc E", 250L, null, null);
-        Bloc savedBloc = blocService.addBloc(bloc);
+    public void testAddBloc() {
+        // Arrange
+        Bloc bloc = new Bloc();
+        when(blocRepository.save(bloc)).thenReturn(bloc);
 
-        blocService.removeBloc(savedBloc.getIdBloc());
-        assertFalse(blocRepository.existsById(savedBloc.getIdBloc()));
+        // Act
+        Bloc result = blocService.addBloc(bloc);
+
+        // Assert
+        assertNotNull(result);
+        verify(blocRepository, times(1)).save(bloc);
+    }
+
+    @Test
+    public void testModifyBloc() {
+        // Arrange
+        Bloc bloc = new Bloc();
+        when(blocRepository.save(bloc)).thenReturn(bloc);
+
+        // Act
+        Bloc result = blocService.modifyBloc(bloc);
+
+        // Assert
+        assertNotNull(result);
+        verify(blocRepository, times(1)).save(bloc);
+    }
+
+    @Test
+    public void testRemoveBloc() {
+        // Arrange
+        Long blocId = 1L;
+        doNothing().when(blocRepository).deleteById(blocId);
+
+        // Act
+        blocService.removeBloc(blocId);
+
+        // Assert
+        verify(blocRepository, times(1)).deleteById(blocId);
+    }
+
+    @Test
+    public void testTrouverBlocsSansFoyer() {
+        // Arrange
+        Bloc bloc1 = new Bloc();
+        Bloc bloc2 = new Bloc();
+        when(blocRepository.findAllByFoyerIsNull()).thenReturn(Arrays.asList(bloc1, bloc2));
+
+        // Act
+        List<Bloc> blocs = blocService.trouverBlocsSansFoyer();
+
+        // Assert
+        assertEquals(2, blocs.size());
+        verify(blocRepository, times(1)).findAllByFoyerIsNull();
+    }
+
+    @Test
+    public void testTrouverBlocsParNomEtCap() {
+        // Arrange
+        Bloc bloc1 = new Bloc();
+        bloc1.setNomBloc("Bloc A");
+        bloc1.setCapaciteBloc(100);
+        when(blocRepository.findAllByNomBlocAndCapaciteBloc("Bloc A", 100))
+                .thenReturn(Arrays.asList(bloc1));
+
+        // Act
+        List<Bloc> blocs = blocService.trouverBlocsParNomEtCap("Bloc A", 100);
+
+        // Assert
+        assertEquals(1, blocs.size());
+        assertEquals("Bloc A", blocs.get(0).getNomBloc());
+        verify(blocRepository, times(1))
+                .findAllByNomBlocAndCapaciteBloc("Bloc A", 100);
     }
 }
