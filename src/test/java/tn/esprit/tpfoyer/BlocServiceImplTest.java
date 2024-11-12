@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.annotation.Rollback;
 import tn.esprit.tpfoyer.entity.Bloc;
@@ -15,19 +16,24 @@ import tn.esprit.tpfoyer.service.BlocServiceImpl;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
+@ActiveProfiles("test")  // Utilise le profil de test pour charger application-test.properties
 @TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
 public class BlocServiceImplTest {
+
     @Autowired
     BlocServiceImpl blocService;
 
     @Autowired
     BlocRepository blocRepository;
+
     @BeforeEach
     void setUp() {
-        // Clear the database before each test
+        // Vider la base de données avant chaque test
         blocRepository.deleteAll();
     }
+
     @Test
     @Order(1)
     @Transactional
