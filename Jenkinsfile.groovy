@@ -17,10 +17,18 @@ pipeline {
             }
         }
 
-        stage('Maven Clean and Compile and test') {
+        stage('Maven Clean and Compile') {
             steps {
                 script {
-                    sh 'mvn clean compile test'
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+
+        stage('Maven test') {
+            steps {
+                script {
+                    sh 'mvn test'
                 }
             }
         }
@@ -28,12 +36,12 @@ pipeline {
         stage('Maven Package') {
             steps {
                 script {
-                    sh 'mvn package'
+                    sh 'mvn package -DskipTests'
                 }
             }
         }
 
-        /*stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: '71c996e3-a2eb-47ae-b081-f6d349669f6d', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PASSWORD')]) {
@@ -47,7 +55,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
         
         stage('Maven Deploy') {
             steps {
