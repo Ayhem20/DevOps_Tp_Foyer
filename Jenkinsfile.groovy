@@ -96,8 +96,8 @@ pipeline {
                 }
             }
         }
-
-        post {
+    }
+    post {
             success {
                 emailext (
                     to: 'ayhem.boughdiri@esprit.tn',
@@ -113,6 +113,5 @@ pipeline {
                     body: "The build ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed. Please check the console output for details."
                 )
             }
-        }
     }
 } 
