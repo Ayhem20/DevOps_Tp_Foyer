@@ -13,7 +13,7 @@ services:
       - db_data:/var/lib/mysql
 
   app-foyer:
-    image: ibtihelgr/tp-foyer-5.0.0
+    image: ibtihelgr/tp-foyer:latest
     container_name: app-foyer1
     depends_on:
       - mysqldb

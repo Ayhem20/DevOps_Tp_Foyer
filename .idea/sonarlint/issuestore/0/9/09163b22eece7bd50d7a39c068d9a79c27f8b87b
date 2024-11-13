@@ -1,0 +1,11 @@
+
+t
+java:S1488"YImmediately return this expression instead of assigning it to the temporary variable "c".(Íˆşÿÿÿÿ
+u
+java:S1488""_Immediately return this expression instead of assigning it to the temporary variable "chambre".(ª±ÛÇ
+k
+java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Íˆşÿÿÿÿ
+Q
+java:S1854'";Remove this useless assignment to local variable "chambre".(ª±ÛÇ
+B
+java:S1481'",Remove this unused "chambre" local variable.(ª±ÛÇ
