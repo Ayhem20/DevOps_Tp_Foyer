@@ -46,7 +46,7 @@ pipeline {
         // Étape pour analyser le code avec SonarQube
         stage('MVN SONARQUBE') {
             steps {
-                withCredentials([string(credentialsId: 'reservationvf', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: '24d5b7bd-64bc-4d5e-8b7c-9ae96e35ceec', variable: 'SONAR_TOKEN')]) {
                     sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
                 }
             }
