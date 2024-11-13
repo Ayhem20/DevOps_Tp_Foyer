@@ -10,7 +10,7 @@
     </parent>
     <groupId>tn.esprit</groupId>
     <artifactId>tp-foyer</artifactId>
-    <version>6.0.0</version>
+    <version>5.0.0</version>
     <name>tp-foyer</name>
     <description>tp-foyer</description>
     <properties>
@@ -158,6 +158,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>4.0.0.4121</version> <!-- Ensure the version is up-to-date -->
             </plugin>
         </plugins>
     </build>
