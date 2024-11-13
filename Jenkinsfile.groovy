@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    environment {
-        NEXUS_URL = 'http://localhost:8081/repository/maven-releases/tn/esprit/tp-foyer/5.0.4/tp-foyer-5.0.4.jar' // The Nexus URL for the JAR file
-        JAR_FILE = 'tp-foyer-5.0.4.jar' // The name of the JAR file to download
-    }
-////////////////////
     stages {
 
         stage('Checkout Code') {
@@ -62,17 +57,6 @@ pipeline {
             }
         }
 
-        /*stage('Download JAR from Nexus') {
-            steps {
-                script {
-                    echo "Downloading JAR from Nexus"
-                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials-id', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
-                        sh "wget --user=$NEXUS_USER --password=$NEXUS_PASSWORD -O ${JAR_FILE} ${NEXUS_URL}"
-                    }
-                }
-            }
-        }*/
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -110,6 +94,24 @@ pipeline {
                     sh 'docker compose up -d'
                     
                 }
+            }
+        }
+
+        post {
+            success {
+                emailext (
+                    to: 'ayhem.boughdiri@esprit.tn',
+                    subject: "Jenkins Pipeline Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: "The build ${env.JOB_NAME} #${env.BUILD_NUMBER} has succeeded."
+                )
+            }
+            
+            failure {
+                emailext (
+                    to: 'ayhem.boughdiri@esprit.tn',
+                    subject: "Jenkins Pipeline Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: "The build ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed. Please check the console output for details."
+                )
             }
         }
     }
