@@ -1,5 +1,5 @@
 # Use a base image with Java 17
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk-alpine
 
 # Set environment variables for the application
 ENV SPRING_PROFILES_ACTIVE=prod
